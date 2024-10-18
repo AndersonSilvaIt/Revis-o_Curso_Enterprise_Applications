@@ -14,7 +14,7 @@ namespace NSE.Identidade.API.Models
         public string Senha { get; set; }
 
 
-        [Compare("Senha", ErrorMessage = "As senhas não conferem")]
+        [Compare("Senha", ErrorMessage = "As senhas não conferem.")]
         public string SenhaConfirmacao { get; set; }
     }
 
