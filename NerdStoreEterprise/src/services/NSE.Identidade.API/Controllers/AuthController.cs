@@ -42,7 +42,7 @@ namespace NSE.Identidade.API.Controllers
 
             if (result.Succeeded)
             {
-                return CustomResponse(await GerarJwt(usuarioRegistro.Email);
+                return CustomResponse(await GerarJwt(usuarioRegistro.Email));
             }
 
             foreach (var error in result.Errors)
