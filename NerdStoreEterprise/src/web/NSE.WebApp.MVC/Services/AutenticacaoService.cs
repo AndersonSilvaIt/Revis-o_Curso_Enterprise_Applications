@@ -27,7 +27,11 @@ namespace NSE.WebApp.MVC.Services
 
             if (!TratarErrosResponse(response))
             {
-                return new UsuarioRespostaLogin { ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync()}, options);
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult =
+                    JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
             }
 
             return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(), options);
@@ -46,7 +50,11 @@ namespace NSE.WebApp.MVC.Services
 
             if (!TratarErrosResponse(response))
             {
-                return new UsuarioRespostaLogin { ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync()}, options);
+                return new UsuarioRespostaLogin
+                {
+                    ResponseResult =
+                    JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
             }
 
             return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
