@@ -1,4 +1,6 @@
-﻿namespace NSE.Identidade.API.Configuration
+﻿using NSE.WebAPI.Core.Identidade;
+
+namespace NSE.Identidade.API.Configuration
 {
     public static class ApiConfig
     {
@@ -18,7 +20,7 @@
 
             app.UseHttpsRedirection();
 
-            app.UseIdentityConfiguration();
+            app.UseAuthConfiguration();
 
             app.MapControllers();
 

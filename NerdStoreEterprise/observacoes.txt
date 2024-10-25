@@ -1,0 +1,5 @@
+Adicionado uma Claim no banco de usuário, para implementar as validações de Claims
+
+UserId: 011ab8ec-be7a-45d8-9d88-c793e4a0166e
+ClaimType: Catalogo
+ClaimValue: Ler

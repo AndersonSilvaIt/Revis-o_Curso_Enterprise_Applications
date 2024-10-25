@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NSE.Catalogo.API.Data;
+using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Catalogo.API.Configuration
 {
@@ -27,7 +28,18 @@ namespace NSE.Catalogo.API.Configuration
 
         public static void UseApiConfiguration(this WebApplication app)
         {
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseCors("Total");
+
+            app.UseAuthConfiguration();
 
             app.UseAuthorization();
 
