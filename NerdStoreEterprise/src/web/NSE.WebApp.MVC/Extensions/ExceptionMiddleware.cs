@@ -17,7 +17,7 @@ namespace NSE.WebApp.MVC.Extensions
             {
                 await _next(context);
             }
-            catch (Exception ex)
+            catch (CustomHttpRequestException ex)
             {
                 HandleRequestExceptionAsync(context, ex);
             }
@@ -27,7 +27,9 @@ namespace NSE.WebApp.MVC.Extensions
         {
             if(httpRequestException.StatusCode == HttpStatusCode.Unauthorized)
             {
-                context.Response.Redirect("/login");
+                // O ReturnUrl, quando a pessoa fizer o Login, ele será automaticamente redirecionado para o PATH informado. Precisa alterar em outro local também.
+                // foi alterado também na controller de Login (IdentidadeController.cs) e também alterado na View de Login
+                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
 
