@@ -1,36 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using NSE.Catalogo.API.Data;
-using NSE.Catalogo.API.Data.Repository;
-using NSE.Catalogo.API.Models;
+using NSE.Catalogo.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddDbContext<CatalogoContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+builder.Services.AddApiConfiguration(builder.Configuration);
 
-builder.Services.AddScoped<CatalogoContext>();
-builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddSwaggerConfiguration();
 
-builder.Services.AddControllers();
+builder.Services.RegisterServices();
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwaggerConfiguration();
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseApiConfiguration();
 
 app.Run();
