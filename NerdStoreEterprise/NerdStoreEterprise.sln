@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{488C050D-93CB-4346-A6E9-77F8DFA6F5AA}"
+	ProjectSection(SolutionItems) = preProject
+		observacoes.txt = observacoes.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Building Blocks", "Building Blocks", "{0E6DEE51-D2DD-45F0-AF2A-17C6378059F2}"
 EndProject
