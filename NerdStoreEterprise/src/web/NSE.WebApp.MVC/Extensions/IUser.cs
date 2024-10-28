@@ -14,7 +14,7 @@ namespace NSE.WebApp.MVC.Extensions
 
         IEnumerable<Claim> ObterClaims();
 
-        HttpContext ObterHttpContexT();
+        HttpContext ObterHttpContext();
     }
 
     public class AspNetUser : IUser
@@ -59,7 +59,7 @@ namespace NSE.WebApp.MVC.Extensions
             return _acessor.HttpContext.User.Claims;
         }
 
-        public HttpContext ObterHttpContexT()
+        public HttpContext ObterHttpContext()
         {
             return _acessor.HttpContext;
         }
