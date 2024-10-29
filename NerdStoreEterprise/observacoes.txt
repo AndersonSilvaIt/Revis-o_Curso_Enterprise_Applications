@@ -6,3 +6,5 @@ ClaimValue: Ler
 
 Utilizado a biblioteca Refit para consumo de HttpClient = API Rest no projeto MVC, para consumo de catálogo
 
+Retry Pattern com Polly --> Para fazer retentativas de consumo de API
+
