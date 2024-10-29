@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Refit;
+using System.Net;
 
 namespace NSE.WebApp.MVC.Extensions
 {
@@ -19,13 +20,21 @@ namespace NSE.WebApp.MVC.Extensions
             }
             catch (CustomHttpRequestException ex)
             {
-                HandleRequestExceptionAsync(context, ex);
+                HandleRequestExceptionAsync(context, ex.StatusCode);
+            }
+            catch (ValidationApiException ex) // ValidationApiException é do Refit, não é obrigatório usar o Refit, ainda prefiro o HttpClient
+            {
+                HandleRequestExceptionAsync(context, ex.StatusCode);
+            }
+            catch (ApiException ex)
+            {
+                HandleRequestExceptionAsync(context, ex.StatusCode);
             }
         }
 
-        public void HandleRequestExceptionAsync(HttpContext context, CustomHttpRequestException httpRequestException )
+        public void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
         {
-            if(httpRequestException.StatusCode == HttpStatusCode.Unauthorized)
+            if (statusCode == HttpStatusCode.Unauthorized)
             {
                 // O ReturnUrl, quando a pessoa fizer o Login, ele será automaticamente redirecionado para o PATH informado. Precisa alterar em outro local também.
                 // foi alterado também na controller de Login (IdentidadeController.cs) e também alterado na View de Login
@@ -33,7 +42,7 @@ namespace NSE.WebApp.MVC.Extensions
                 return;
             }
 
-            context.Response.StatusCode = (int)httpRequestException.StatusCode;
+            context.Response.StatusCode = (int)statusCode;
         }
     }
 }
