@@ -3,22 +3,16 @@ using NSE.WebApp.MVC.Models;
 
 namespace NSE.WebApp.MVC.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : MainController
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        //sistema-indisponível
-        [Route("sistema-indisponível")]
-        public IActionResult SistemIndisponivel()
+        [Route("sistema-indisponivel")]
+        public IActionResult SistemaIndisponivel()
         {
             var modelErro = new ErrorViewModel
             {
                 Mensagem = "O sistema está temporariamente indisponível, isto pode ocorrer em momentos de sobrecarga de usuários.",
                 Titulo = "Sistema indisponível.",
-                ErrorCode = 500
+                ErroCode = 500
             };
 
             return View("Error", modelErro);
@@ -33,20 +27,21 @@ namespace NSE.WebApp.MVC.Controllers
             if (id == 500)
             {
                 modelErro.Mensagem = "Ocorreu um erro! Tente novamente mais tarde ou contate nosso suporte.";
-                modelErro.Titulo = "Ocorreu um erro";
-                modelErro.ErrorCode = id;
+                modelErro.Titulo = "Ocorreu um erro!";
+                modelErro.ErroCode = id;
             }
             else if (id == 404)
             {
-                modelErro.Mensagem = "A página que está procurando não existe!  <br/>Em caso de dúvidas entre em contato com nosso suporte";
+                modelErro.Mensagem =
+                    "A página que está procurando não existe! <br />Em caso de dúvidas entre em contato com nosso suporte";
                 modelErro.Titulo = "Ops! Página não encontrada.";
-                modelErro.ErrorCode = id;
+                modelErro.ErroCode = id;
             }
             else if (id == 403)
             {
                 modelErro.Mensagem = "Você não tem permissão para fazer isto.";
-                modelErro.Titulo = "Acesso negado";
-                modelErro.ErrorCode = id;
+                modelErro.Titulo = "Acesso Negado";
+                modelErro.ErroCode = id;
             }
             else
             {
@@ -54,11 +49,6 @@ namespace NSE.WebApp.MVC.Controllers
             }
 
             return View("Error", modelErro);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
         }
     }
 }

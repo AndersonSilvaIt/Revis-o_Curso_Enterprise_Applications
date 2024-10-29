@@ -1,6 +1,6 @@
-﻿using Polly.CircuitBreaker;
+﻿using System.Net;
+using Polly.CircuitBreaker;
 using Refit;
-using System.Net;
 
 namespace NSE.WebApp.MVC.Extensions
 {
@@ -13,36 +13,34 @@ namespace NSE.WebApp.MVC.Extensions
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext httpContext)
         {
             try
             {
-                await _next(context);
+                await _next(httpContext);
             }
             catch (CustomHttpRequestException ex)
             {
-                HandleRequestExceptionAsync(context, ex.StatusCode);
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
-            catch (ValidationApiException ex) // ValidationApiException é do Refit, não é obrigatório usar o Refit, ainda prefiro o HttpClient
+            catch (ValidationApiException ex)
             {
-                HandleRequestExceptionAsync(context, ex.StatusCode);
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
             catch (ApiException ex)
             {
-                HandleRequestExceptionAsync(context, ex.StatusCode);
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
             catch (BrokenCircuitException)
             {
-                HandleCircuitBreakerException(context);
+                HandleCircuitBreakerExceptionAsync(httpContext);
             }
         }
 
-        public void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
+        private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
         {
             if (statusCode == HttpStatusCode.Unauthorized)
             {
-                // O ReturnUrl, quando a pessoa fizer o Login, ele será automaticamente redirecionado para o PATH informado. Precisa alterar em outro local também.
-                // foi alterado também na controller de Login (IdentidadeController.cs) e também alterado na View de Login
                 context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
@@ -50,9 +48,9 @@ namespace NSE.WebApp.MVC.Extensions
             context.Response.StatusCode = (int)statusCode;
         }
 
-        public void HandleCircuitBreakerException(HttpContext context)
+        private static void HandleCircuitBreakerExceptionAsync(HttpContext context)
         {
-            context.Response.Redirect("/sistema-indisponível");
+            context.Response.Redirect("/sistema-indisponivel");
         }
     }
 }
