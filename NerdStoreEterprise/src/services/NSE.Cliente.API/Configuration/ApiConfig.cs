@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NSE.Catalogo.API.Data;
+using NSE.Cliente.API.Data;
 using NSE.WebAPI.Core.Identidade;
 
-namespace NSE.Catalogo.API.Configuration
+namespace NSE.Cliente.API.Configuration
 {
     public static class ApiConfig
     {
         public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<CatalogoContext>(options =>
+            services.AddDbContext<ClientesContext>(options =>
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
@@ -44,6 +44,5 @@ namespace NSE.Catalogo.API.Configuration
 
             app.MapControllers();
         }
-
     }
 }

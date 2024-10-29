@@ -3,7 +3,6 @@ using NSE.WebAPI.Core.Identidade;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddApiConfiguration(builder.Configuration);
 
 builder.Services.AddJwtConfiguration(builder.Configuration);
