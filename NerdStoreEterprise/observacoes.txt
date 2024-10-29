@@ -10,3 +10,11 @@ Retry Pattern com Polly --> Para fazer retentativas de consumo de API
 
 Circuit Breaker --> Usado para romper a comunicação após X tentativas...
 
+Clliente / Usuário
+
+
+Usuário criar um registro * API Autenticação *
+* API Autenticação * Envia um registro na fila ( RabbitMQ ) para * API Cliente * escutar
+* API Cliente * Escuta a fila do RabbitMQ e cadastra um novo cliente.
+* API Cliente * Devolve uma mensagem na Fila (sucesso/erro)
+* API Autenticação * Recebe a mensagem e mostra na tela.
