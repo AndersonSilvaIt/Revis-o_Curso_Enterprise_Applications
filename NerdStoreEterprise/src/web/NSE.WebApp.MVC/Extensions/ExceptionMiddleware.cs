@@ -1,4 +1,5 @@
-﻿using Refit;
+﻿using Polly.CircuitBreaker;
+using Refit;
 using System.Net;
 
 namespace NSE.WebApp.MVC.Extensions
@@ -30,6 +31,10 @@ namespace NSE.WebApp.MVC.Extensions
             {
                 HandleRequestExceptionAsync(context, ex.StatusCode);
             }
+            catch (BrokenCircuitException)
+            {
+                HandleCircuitBreakerException(context);
+            }
         }
 
         public void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCode)
@@ -43,6 +48,11 @@ namespace NSE.WebApp.MVC.Extensions
             }
 
             context.Response.StatusCode = (int)statusCode;
+        }
+
+        public void HandleCircuitBreakerException(HttpContext context)
+        {
+            context.Response.Redirect("/sistema-indisponível");
         }
     }
 }

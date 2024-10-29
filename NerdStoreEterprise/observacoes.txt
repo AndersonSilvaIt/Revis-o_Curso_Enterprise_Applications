@@ -8,3 +8,5 @@ Utilizado a biblioteca Refit para consumo de HttpClient = API Rest no projeto MV
 
 Retry Pattern com Polly --> Para fazer retentativas de consumo de API
 
+Circuit Breaker --> Usado para romper a comunicação após X tentativas...
+
