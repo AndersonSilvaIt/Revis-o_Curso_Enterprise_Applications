@@ -21,3 +21,20 @@ Usuário criar um registro * API Autenticação *
 
 * Criado o Command ClienteCommandHandler para registrar um cliente
 * Criado o Evento ClienteRegistradoEvent para notificar a criação do cliente
+
+Comando para criar a imagem do RabbitMQ para executar o projeto.
+
+	docker run -d --hostname rabbit-host --name rabbit-nerdstore -p 15672:15672 -p 5672:5672 rabbitmq:management
+	
+	localhost:15672/
+	RabbitMQ
+	Login: guest
+	Senha: guest
+
+
+Aplicativos para verificar o docker
+	* Docker Desktop
+	* Portainer
+
+Biblioteca para comunicação com o RabbitMQ
+	* EasyNetQ
