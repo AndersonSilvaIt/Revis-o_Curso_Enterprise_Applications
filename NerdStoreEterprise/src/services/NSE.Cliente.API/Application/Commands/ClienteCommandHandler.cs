@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using MediatR;
+using NSE.Cliente.API.Application.Events;
 using NSE.Cliente.API.Models;
 using NSE.Core.Messages;
 
@@ -27,6 +28,8 @@ namespace NSE.Cliente.API.Application.Commands
                 AdicionarErro("Este CPF já está em uso.");
                 return ValidationResult;
             }
+
+            cliente.AdicionarEvento(new ClienteRegistradoEvent(message.Id, message.Nome, message.Email, message.Cpf));
 
             _clienteRepository.Adicionar(cliente);
 

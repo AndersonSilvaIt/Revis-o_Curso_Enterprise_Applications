@@ -18,3 +18,5 @@ Usuário criar um registro * API Autenticação *
 * API Cliente * Escuta a fila do RabbitMQ e cadastra um novo cliente.
 * API Cliente * Devolve uma mensagem na Fila (sucesso/erro)
 * API Autenticação * Recebe a mensagem e mostra na tela.
+
+Criado o Command ClienteCommandHandler para registrar um cliente
