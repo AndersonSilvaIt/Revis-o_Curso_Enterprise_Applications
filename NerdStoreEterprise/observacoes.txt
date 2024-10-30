@@ -19,4 +19,5 @@ Usuário criar um registro * API Autenticação *
 * API Cliente * Devolve uma mensagem na Fila (sucesso/erro)
 * API Autenticação * Recebe a mensagem e mostra na tela.
 
-Criado o Command ClienteCommandHandler para registrar um cliente
+* Criado o Command ClienteCommandHandler para registrar um cliente
+* Criado o Evento ClienteRegistradoEvent para notificar a criação do cliente
