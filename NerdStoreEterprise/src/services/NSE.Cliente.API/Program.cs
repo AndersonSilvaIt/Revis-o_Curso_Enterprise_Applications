@@ -15,6 +15,8 @@ builder.Services.AddMediatR(typeof(Program));
 
 builder.Services.RegisterServices();
 
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
+
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
