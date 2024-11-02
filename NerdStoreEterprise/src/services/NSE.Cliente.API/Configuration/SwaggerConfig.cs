@@ -4,21 +4,21 @@ namespace NSE.Cliente.API.Configuration
 {
     public static class SwaggerConfig
     {
-        public static void AddSwaggerConfiguration(this IServiceCollection servicecs)
+        public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
-            servicecs.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "NerdStore Enterprise Cliente API",
-                    Description = "API Curso Enterprise Aplication ASP.NET CORE",
-                    Contact = new OpenApiContact() { Name = "Anderson", Email = "anderson.silvait@outlook.com" },
-                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://www.google.com") }
+                    Title = "NerdStore Enterprise Clientes API",
+                    Description = "Esta API faz parte do curso ASP.NET Core Enterprise Applications.",
+                    Contact = new OpenApiContact() { Name = "Eduardo Pires", Email = "contato@desenvolvedor.io" },
+                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Insira o tooken JWT desta maneira: Bearer {seu token}",
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
                     Name = "Authorization",
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
@@ -47,7 +47,6 @@ namespace NSE.Cliente.API.Configuration
         public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");

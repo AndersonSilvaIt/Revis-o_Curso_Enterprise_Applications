@@ -40,9 +40,10 @@ namespace NSE.Cliente.API.Configuration
 
             app.UseAuthConfiguration();
 
-            app.UseAuthorization();
-
-            app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

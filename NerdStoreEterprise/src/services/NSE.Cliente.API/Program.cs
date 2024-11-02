@@ -1,4 +1,3 @@
-using NSE.Cliente.API;
 using NSE.Cliente.API.Configuration;
 using NSE.WebAPI.Core.Identidade;
 using MediatR;
@@ -11,7 +10,8 @@ builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddSwaggerConfiguration();
 
-builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 
 builder.Services.RegisterServices();
 

@@ -1,5 +1,4 @@
-﻿using System;
-using NSE.Core.Messages.Integration;
+﻿using NSE.Core.Messages.Integration;
 using EasyNetQ;
 using Polly;
 using RabbitMQ.Client.Exceptions;
@@ -9,8 +8,7 @@ namespace NSE.MessageBus
     public class MessageBus : IMessageBus
     {
         private IBus _bus;
-        private IAdvancedBus _advanceBus;
-        private object _advancedBus;
+        private IAdvancedBus _advancedBus;
         private readonly string _connecetionString;
 
         public bool IsConnected => _bus?.Advanced.IsConnected ?? false;
@@ -90,7 +88,7 @@ namespace NSE.MessageBus
             {
                 _bus = RabbitHutch.CreateBus(_connecetionString);
                 _advancedBus = _bus.Advanced;
-                _advanceBus.Disconnected += OnDisconnect;
+                _advancedBus.Disconnected += OnDisconnect;
             });
         }
 
