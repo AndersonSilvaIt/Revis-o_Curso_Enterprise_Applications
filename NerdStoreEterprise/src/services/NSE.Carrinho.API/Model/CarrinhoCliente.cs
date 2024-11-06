@@ -1,7 +1,11 @@
-﻿namespace NSE.Carrinho.API.Model
+﻿using Microsoft.EntityFrameworkCore.Storage;
+
+namespace NSE.Carrinho.API.Model
 {
     public class CarrinhoCliente
     {
+        internal const int MAX_QUANTIDADE_ITEM = 5;
+
         public Guid Id { get; set; }
         public Guid ClienteId { get; set; }
         public decimal ValorTotal { get; set; }
@@ -13,8 +17,45 @@
             ClienteId = clienteId;
         }
 
-        public CarrinhoCliente()
+        public CarrinhoCliente() { }
+
+        internal void CalcularValorCarrinho()
         {
+            ValorTotal = Itens.Sum(p => p.CalcularValor());
         }
+
+        internal bool CarrinhoItemExistente(CarrinhoItem item)
+        {
+            return Itens.Any(p => p.ProdutoId == item.ProdutoId);
+        }
+
+        internal CarrinhoItem ObterPorProdutoId(Guid produtoId)
+        {
+            return Itens.FirstOrDefault(p => p.ProdutoId == produtoId);
+        }
+
+        internal void AdicionarItem(CarrinhoItem item)
+        {
+            if (!item.EhValido()) return;
+
+            // validar se o item está ok!
+            item.AssociarCarrinho(Id);
+
+            if (CarrinhoItemExistente(item))
+            {
+                var itemExistente = ObterPorProdutoId(item.ProdutoId);
+
+                itemExistente.AdicionarUnidades(item.Quantidade);
+
+                item = itemExistente;
+
+                Itens.Remove(itemExistente);
+            }
+
+            Itens.Add(item);
+            CalcularValorCarrinho();
+        }
+
+
     }
 }
