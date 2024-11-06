@@ -36,6 +36,7 @@ namespace NSE.Carrinho.API.Controllers
             else
                 ManipularCarrinhoExistente(carrinho, item);
 
+            ValidarCarrinho(carrinho);
             if (!OperacaoValida()) return CustomResponse();
 
             await PersistirDados();
@@ -52,6 +53,9 @@ namespace NSE.Carrinho.API.Controllers
 
             carrinho.AtualizarUnidades(itemCarrinho, item.Quantidade);
 
+            ValidarCarrinho(carrinho);
+            if (!OperacaoValida()) return CustomResponse();
+
             _contexto.CarrinhoItens.Update(itemCarrinho);
             _contexto.CarrinhoCliente.Update(carrinho);
 
@@ -66,6 +70,9 @@ namespace NSE.Carrinho.API.Controllers
             var itemCarrinho = await ObterItemCarrinhoValidado(produtoId, carrinho);
 
             if (itemCarrinho == null) return CustomResponse();
+
+            ValidarCarrinho(carrinho);
+            if (!OperacaoValida()) return CustomResponse();
 
             carrinho.RemoverItem(itemCarrinho);
 
@@ -139,6 +146,15 @@ namespace NSE.Carrinho.API.Controllers
         {
             var result = await _contexto.SaveChangesAsync();
             if (result <= 0) AdicionarErroProcessamento("Não foi possível persistir os dados no banco");
+        }
+
+        private bool ValidarCarrinho(CarrinhoCliente carrinho)
+        {
+            if (carrinho.EhValido()) return true;
+
+            carrinho.ValidationResult.Errors.ToList().ForEach(e => AdicionarErroProcessamento(e.ErrorMessage));
+
+            return false;
         }
     }
 }
