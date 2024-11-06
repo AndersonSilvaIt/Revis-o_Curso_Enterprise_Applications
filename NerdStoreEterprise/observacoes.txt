@@ -38,3 +38,10 @@ Aplicativos para verificar o docker
 
 Biblioteca para comunicação com o RabbitMQ
 	* EasyNetQ
+
+BFF (Back End For FrontEnd) - API Gateway
+
+
+Na API de carrinho, para criar as Migrations do Carrinho
+	* add-migration Carrinho -StartupProject NSE.Carrinho.API
+	* update-database Carrinho -StartupProject NSE.Carrinho.API
