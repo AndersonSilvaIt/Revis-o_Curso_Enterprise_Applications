@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NSE.Core.Communication;
+using System.ComponentModel.DataAnnotations;
 
 namespace NSE.WebApp.MVC.Models
 {
