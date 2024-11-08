@@ -35,7 +35,7 @@ namespace NSE.WebApp.MVC.Extensions
             return unidades > 1 ? $"{unidades} unidades" : $"{unidades} unidade";
         }
 
-        public static string SelectOptionsPorQuantidade(this RazorPage page, int quantidade, int valorSelecionado = o)
+        public static string SelectOptionsPorQuantidade(this RazorPage page, int quantidade, int valorSelecionado)
         {
             var sb = new StringBuilder();
 
