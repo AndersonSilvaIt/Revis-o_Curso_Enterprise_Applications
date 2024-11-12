@@ -3,9 +3,9 @@ using NSE.Pedido.Domain.Vouchers;
 
 namespace NSE.Pedido.Domain.Pedidos
 {
-    public class Pedido : Entity, IAggregateRoot
+    public class Pedidos : Entity, IAggregateRoot
     {
-        public Pedido(Guid clienteId, decimal valorTotal, List<PedidoItem> pedidoItems,
+        public Pedidos(Guid clienteId, decimal valorTotal, List<PedidoItem> pedidoItems,
                         bool voucherUtilizado = false, decimal desconto = 0, Guid? voucherId = null)
         {
             ClienteId = clienteId;
@@ -18,7 +18,7 @@ namespace NSE.Pedido.Domain.Pedidos
         }
 
         // EF ctor
-        public Pedido() { }
+        public Pedidos() { }
 
         public int Codigo { get; private set; }
         public Guid ClienteId { get; private set; }

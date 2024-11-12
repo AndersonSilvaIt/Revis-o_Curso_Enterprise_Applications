@@ -1,5 +1,4 @@
 ﻿using NetDevPack.Domain;
-using System.Diagnostics.Tracing;
 
 namespace NSE.Pedido.Domain.Pedidos
 {
@@ -13,7 +12,7 @@ namespace NSE.Pedido.Domain.Pedidos
         public string ProdutoImagem { get; private set; }
         
         // EF Rel.
-        public Pedido Pedido { get; private set; }
+        public Pedidos Pedido { get; private set; }
 
         public PedidoItem(Guid produtoId, string produtoNome, int quantidade, decimal valorUnitario, string produtoImagem = null)
         {

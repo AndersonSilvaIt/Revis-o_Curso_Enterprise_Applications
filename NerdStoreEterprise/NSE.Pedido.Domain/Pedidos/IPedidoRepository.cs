@@ -2,12 +2,12 @@
 
 namespace NSE.Pedido.Domain.Pedidos
 {
-    public interface IPedidoRepository : IRepository<Pedido>
+    public interface IPedidoRepository : IRepository<Pedidos>
     {
-        Task<Pedido> ObterPorId(Guid id);
-        Task<IEnumerable<Pedido>> ObterListaPorClienteId(Guid clienteId);
-        void Adicionar(Pedido pedido);
-        void Atualizar(Pedido pedido);
+        Task<Pedidos> ObterPorId(Guid id);
+        Task<IEnumerable<Pedidos>> ObterListaPorClienteId(Guid clienteId);
+        void Adicionar(Pedidos pedido);
+        void Atualizar(Pedidos pedido);
 
         /* Pedido Items */
         Task<PedidoItem> ObterItemPorId(Guid id);
