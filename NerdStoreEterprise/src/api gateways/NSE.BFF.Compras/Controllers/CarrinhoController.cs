@@ -90,7 +90,7 @@ namespace NSE.BFF.Compras.Controllers
             return CustomResponse(resposta);
         }
 
-        [HttpPost]'
+        [HttpPost]
         [Route("compras/carrinho/aplicar-voucher")]
         public async Task<IActionResult> AplicarVoucher([FromBody] string voucherCodigo)
         {

@@ -1,6 +1,6 @@
-﻿using NetDevPack.Domain;
+﻿using NSE.Core.DomainObjects;
 
-namespace NSE.Pedido.Domain.Pedidos
+namespace NSE.Pedidos.Domain.Pedidos
 {
     public class PedidoItem : Entity
     {
@@ -9,12 +9,13 @@ namespace NSE.Pedido.Domain.Pedidos
         public string ProdutoNome { get; private set; }
         public int Quantidade { get; private set; }
         public decimal ValorUnitario { get; private set; }
-        public string ProdutoImagem { get; private set; }
-        
-        // EF Rel.
-        public Pedidos Pedido { get; private set; }
+        public string ProdutoImagem { get; set; }
 
-        public PedidoItem(Guid produtoId, string produtoNome, int quantidade, decimal valorUnitario, string produtoImagem = null)
+        // EF Rel.
+        public Pedido Pedido { get; set; }
+
+        public PedidoItem(Guid produtoId, string produtoNome, int quantidade,
+            decimal valorUnitario, string produtoImagem = null)
         {
             ProdutoId = produtoId;
             ProdutoNome = produtoNome;
@@ -24,7 +25,7 @@ namespace NSE.Pedido.Domain.Pedidos
         }
 
         // EF ctor
-        public PedidoItem() { }
+        protected PedidoItem() { }
 
         internal decimal CalcularValor()
         {

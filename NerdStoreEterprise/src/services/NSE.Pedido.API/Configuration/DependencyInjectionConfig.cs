@@ -1,9 +1,9 @@
 ﻿using NSE.Core.Mediator;
-using NSE.Pedido.Domain.Vouchers;
-using NSE.Pedido.Infra.Data.Repository;
-using NSE.Pedido.Infra.Data;
 using NSE.WebAPI.Core.Usuario;
 using NSE.Pedido.API.Application.Queries;
+using NSE.Pedidos.Domain.Vouchers;
+using NSE.Pedidos.Infra.Data.Repository;
+using NSE.Pedidos.Infra.Data;
 
 namespace NSE.Pedido.API.Configuration
 {

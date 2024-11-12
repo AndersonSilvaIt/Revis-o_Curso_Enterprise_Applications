@@ -1,12 +1,12 @@
 ﻿using NSE.Core.DomainObjects;
-using NSE.Pedido.Domain.Vouchers;
+using NSE.Pedidos.Domain.Vouchers;
 
-namespace NSE.Pedido.Domain.Pedidos
+namespace NSE.Pedidos.Domain.Pedidos
 {
-    public class Pedidos : Entity, IAggregateRoot
+    public class Pedido : Entity, IAggregateRoot
     {
-        public Pedidos(Guid clienteId, decimal valorTotal, List<PedidoItem> pedidoItems,
-                        bool voucherUtilizado = false, decimal desconto = 0, Guid? voucherId = null)
+        public Pedido(Guid clienteId, decimal valorTotal, List<PedidoItem> pedidoItems,
+            bool voucherUtilizado = false, decimal desconto = 0, Guid? voucherId = null)
         {
             ClienteId = clienteId;
             ValorTotal = valorTotal;
@@ -18,7 +18,7 @@ namespace NSE.Pedido.Domain.Pedidos
         }
 
         // EF ctor
-        public Pedidos() { }
+        protected Pedido() { }
 
         public int Codigo { get; private set; }
         public Guid ClienteId { get; private set; }
@@ -30,10 +30,8 @@ namespace NSE.Pedido.Domain.Pedidos
         public PedidoStatus PedidoStatus { get; private set; }
 
         private readonly List<PedidoItem> _pedidoItems;
-
-
-
         public IReadOnlyCollection<PedidoItem> PedidoItems => _pedidoItems;
+
         public Endereco Endereco { get; private set; }
 
         // EF Rel.
@@ -44,14 +42,14 @@ namespace NSE.Pedido.Domain.Pedidos
             PedidoStatus = PedidoStatus.Autorizado;
         }
 
-        private void AtribuirVoucher(Voucher voucher)
+        public void AtribuirVoucher(Voucher voucher)
         {
             VoucherUtilizado = true;
             VoucherId = voucher.Id;
             Voucher = voucher;
         }
 
-        public void AtribuirEndedreo(Endereco endereco)
+        public void AtribuirEndereco(Endereco endereco)
         {
             Endereco = endereco;
         }
@@ -89,6 +87,5 @@ namespace NSE.Pedido.Domain.Pedidos
             ValorTotal = valor < 0 ? 0 : valor;
             Desconto = desconto;
         }
-
     }
 }

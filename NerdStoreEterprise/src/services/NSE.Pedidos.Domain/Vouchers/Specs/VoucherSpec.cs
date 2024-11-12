@@ -1,8 +1,9 @@
-﻿using NetDevPack.Specification;
-using NSE.Pedido.Domain.Vouchers;
+﻿using System;
 using System.Linq.Expressions;
+using NetDevPack.Specification;
+using NSE.Pedidos.Domain.Vouchers;
 
-namespace NSE.Pedido.Domain.Vouchers.Specs
+namespace NSE.Pedidos.Domain.Specs
 {
     public class VoucherDataSpecification : Specification<Voucher>
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NSE.Pedido.Infra.Data;
+using NSE.Pedidos.Infra.Data;
 using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Pedido.API.Configuration

@@ -4,28 +4,30 @@ using NSE.Core.Data;
 using NSE.Core.DomainObjects;
 using NSE.Core.Mediator;
 using NSE.Core.Messages;
-using NSE.Pedido.Domain.Pedidos;
-using NSE.Pedido.Domain.Vouchers;
+using NSE.Pedidos.Domain.Pedidos;
+using NSE.Pedidos.Domain.Vouchers;
 
-namespace NSE.Pedido.Infra.Data
+namespace NSE.Pedidos.Infra.Data
 {
     public class PedidosContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediatorHandler;
-        public PedidosContext(DbContextOptions<PedidosContext> options, IMediatorHandler mediatorHandler) : base(options)
+
+        public PedidosContext(DbContextOptions<PedidosContext> options, IMediatorHandler mediatorHandler)
+            : base(options)
         {
             _mediatorHandler = mediatorHandler;
         }
 
-        public DbSet<Pedidos> Pedidos { get; set; }
-        public DbSet<PedidoItem> PedidoItems { get; set; }
 
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<PedidoItem> PedidoItems { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
-                        e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
+                e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
             modelBuilder.Ignore<Event>();
@@ -33,10 +35,8 @@ namespace NSE.Pedido.Infra.Data
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PedidosContext).Assembly);
 
-            foreach (var relatioship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relatioship.DeleteBehavior = DeleteBehavior.ClientSetNull;
-            }
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
             modelBuilder.HasSequence<int>("MinhaSequencia").StartsAt(1000).IncrementsBy(1);
 

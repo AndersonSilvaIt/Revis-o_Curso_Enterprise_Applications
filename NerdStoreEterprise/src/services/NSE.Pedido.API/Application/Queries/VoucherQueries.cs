@@ -1,5 +1,5 @@
 ﻿using NSE.Pedido.API.DTO;
-using NSE.Pedido.Domain.Vouchers;
+using NSE.Pedidos.Domain.Vouchers;
 
 namespace NSE.Pedido.API.Application.Queries
 {
