@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "NSE.Pedido.API": {
+    "NSE.Pedidos.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -8,7 +8,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7236;http://localhost:5262"
+      "applicationUrl": "https://localhost:7180;http://localhost:5172"
     },
     "IIS Express": {
       "commandName": "IISExpress",
@@ -34,8 +34,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:48968",
-      "sslPort": 44347
+      "applicationUrl": "http://localhost:7678",
+      "sslPort": 44385
     }
   }
 }

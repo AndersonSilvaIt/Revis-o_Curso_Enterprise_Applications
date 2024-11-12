@@ -1,4 +1,4 @@
-using NSE.Pedido.API.Configuration;
+using NSE.Pedidos.API.Configuration;
 using NSE.WebAPI.Core.Identidade;
 
 var builder = WebApplication.CreateBuilder(args);

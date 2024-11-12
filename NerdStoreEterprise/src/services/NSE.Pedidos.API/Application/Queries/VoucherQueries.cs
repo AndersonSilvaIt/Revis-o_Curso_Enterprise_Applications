@@ -1,7 +1,7 @@
-﻿using NSE.Pedido.API.DTO;
+﻿using NSE.Pedidos.API.Application.DTO;
 using NSE.Pedidos.Domain.Vouchers;
 
-namespace NSE.Pedido.API.Application.Queries
+namespace NSE.Pedidos.API.Application.Queries
 {
     public interface IVoucherQueries
     {
@@ -23,7 +23,7 @@ namespace NSE.Pedido.API.Application.Queries
 
             if (voucher == null) return null;
 
-            if (voucher.EstaValidoParaUtilizacao()) return null;
+            if (!voucher.EstaValidoParaUtilizacao()) return null;
 
             return new VoucherDTO
             {
