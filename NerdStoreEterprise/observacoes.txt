@@ -53,3 +53,5 @@ Na Migration de Voucher
 	Quando for executar o comando:
 		* Add-Migration Voucher -Context PedidosContext -StartupProject NSE.Pedidos.API
 		* Update-Database -StartupProject NSE.Pedidos.API
+
+Na API de pedido, será usado o Especification Pattern para validações (Pacote .NetDevPack --> Criado pelo Eduardo Pires), foi instalado no NSE.Core
