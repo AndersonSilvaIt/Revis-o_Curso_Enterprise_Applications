@@ -1,5 +1,5 @@
 ﻿using NSE.Core.DomainObjects;
-using NSE.Pedido.Domain.Specs;
+using NSE.Pedido.Domain.Vouchers.Specs;
 
 namespace NSE.Pedido.Domain.Vouchers
 {
