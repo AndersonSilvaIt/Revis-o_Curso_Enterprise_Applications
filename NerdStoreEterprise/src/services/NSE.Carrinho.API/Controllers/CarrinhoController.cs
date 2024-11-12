@@ -12,12 +12,12 @@ namespace NSE.Carrinho.API.Controllers
     public class CarrinhoController : MainController
     {
         private readonly IAspNetUser _user;
-        private readonly CarrinhoContext _contexto;
+        private readonly CarrinhoContext _context;
 
-        public CarrinhoController(IAspNetUser user, CarrinhoContext contexto)
+        public CarrinhoController(IAspNetUser user, CarrinhoContext context)
         {
             _user = user;
-            _contexto = contexto;
+            _context = context;
         }
 
         [HttpGet("carrinho")]
@@ -55,8 +55,8 @@ namespace NSE.Carrinho.API.Controllers
             ValidarCarrinho(carrinho);
             if (!OperacaoValida()) return CustomResponse();
 
-            _contexto.CarrinhoItens.Update(itemCarrinho);
-            _contexto.CarrinhoCliente.Update(carrinho);
+            _context.CarrinhoItens.Update(itemCarrinho);
+            _context.CarrinhoCliente.Update(carrinho);
 
             await PersistirDados();
             return CustomResponse();
@@ -75,13 +75,31 @@ namespace NSE.Carrinho.API.Controllers
 
             carrinho.RemoverItem(itemCarrinho);
 
-            _contexto.CarrinhoItens.Remove(itemCarrinho);
-            _contexto.CarrinhoCliente.Update(carrinho);
+            _context.CarrinhoItens.Remove(itemCarrinho);
+            _context.CarrinhoCliente.Update(carrinho);
 
             await PersistirDados();
 
             return CustomResponse();
         }
+
+        [HttpPost]
+        [Route("carrinho/aplicar-voucher")]
+        public async Task<IActionResult> AplicarVoucher(Voucher voucher)
+        {
+            var carrinho = await ObterCarrinhoCliente();
+
+            carrinho.AplicarVoucher(voucher);
+
+            _context.CarrinhoCliente.Update(carrinho);
+
+            var result = await _context.SaveChangesAsync();
+
+            if (result <= 0) AdicionarErroProcessamento("Não foi possível persistir os dados no banco");
+
+            return CustomResponse();
+        }
+
 
         private void ManipularNovoCarrinho(CarrinhoItem item)
         {
@@ -91,7 +109,7 @@ namespace NSE.Carrinho.API.Controllers
 
             ValidarCarrinho(carrinho);
 
-            _contexto.CarrinhoCliente.Add(carrinho);
+            _context.CarrinhoCliente.Add(carrinho);
         }
 
         private void ManipularCarrinhoExistente(CarrinhoCliente carrinho, CarrinhoItem item)
@@ -104,14 +122,14 @@ namespace NSE.Carrinho.API.Controllers
 
             if (produtoItemExistente)
             {
-                _contexto.CarrinhoItens.Update(carrinho.ObterPorProdutoId(item.ProdutoId));
+                _context.CarrinhoItens.Update(carrinho.ObterPorProdutoId(item.ProdutoId));
             }
             else
             {
-                _contexto.CarrinhoItens.Add(item);
+                _context.CarrinhoItens.Add(item);
             }
 
-            _contexto.CarrinhoCliente.Update(carrinho);
+            _context.CarrinhoCliente.Update(carrinho);
         }
 
         private async Task<CarrinhoItem> ObterItemCarrinhoValidado(Guid produtoId, CarrinhoCliente carrinho, CarrinhoItem item = null)
@@ -128,7 +146,7 @@ namespace NSE.Carrinho.API.Controllers
                 return null;
             }
 
-            var itemCarrinho = await _contexto.CarrinhoItens
+            var itemCarrinho = await _context.CarrinhoItens
                 .FirstOrDefaultAsync(i => i.CarrinhoId == carrinho.Id && i.ProdutoId == produtoId);
 
             if (itemCarrinho == null || !carrinho.CarrinhoItemExistente(itemCarrinho))
@@ -142,14 +160,14 @@ namespace NSE.Carrinho.API.Controllers
 
         private async Task<CarrinhoCliente> ObterCarrinhoCliente()
         {
-            return await _contexto.CarrinhoCliente
+            return await _context.CarrinhoCliente
                 .Include(c => c.Itens)
                 .FirstOrDefaultAsync(c => c.ClienteId == _user.ObterUserId());
         }
 
         private async Task PersistirDados()
         {
-            var result = await _contexto.SaveChangesAsync();
+            var result = await _context.SaveChangesAsync();
             if (result <= 0) AdicionarErroProcessamento("Não foi possível persistir os dados no banco");
         }
 
