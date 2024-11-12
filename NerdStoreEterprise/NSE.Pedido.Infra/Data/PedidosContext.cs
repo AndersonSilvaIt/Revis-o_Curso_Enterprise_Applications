@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NSE.Core.Data;
 using NSE.Core.Mediator;
 using NSE.Core.Messages;
+using NSE.Pedido.Domain.Vouchers;
 
 namespace NSE.Pedido.Infra.Data
 {
@@ -13,6 +14,8 @@ namespace NSE.Pedido.Infra.Data
         {
             _mediatorHandler = mediatorHandler;
         }
+
+        public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

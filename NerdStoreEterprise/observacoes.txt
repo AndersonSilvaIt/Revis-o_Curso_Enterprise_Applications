@@ -47,3 +47,9 @@ Na API de carrinho, para criar as Migrations do Carrinho
 	* update-database Carrinho -StartupProject NSE.Carrinho.API
 
 Nas pastas de ApiGateways, serão criados o s BBFs
+
+Na Migration de Voucher
+	Configurar o Default Projet como: NSE.Pedidos.Infra -->Onde está setado o DbContext
+	Quando for executar o comando:
+		* Add-Migration Voucher -Context PedidosContext -StartupProject NSE.Pedidos.API
+		* Update-Database -StartupProject NSE.Pedidos.API
