@@ -12,7 +12,6 @@ namespace NSE.Pedidos.Domain.Pedidos
 
         DbConnection ObterConexao();
 
-
         /* Pedido Item */
         Task<PedidoItem> ObterItemPorId(Guid id);
         Task<PedidoItem> ObterItemPorPedido(Guid pedidoId, Guid produtoId);
