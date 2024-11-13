@@ -2,7 +2,7 @@
 using NSE.Pedidos.API.Application.DTO;
 using NSE.Pedidos.Domain.Pedidos;
 
-namespace NSE.Pedidos.API.Application
+namespace NSE.Pedidos.API.Application.Queries
 {
     public interface IPedidoQueries
     {
@@ -35,7 +35,7 @@ namespace NSE.Pedidos.API.Application
 
             // Dapper
             var pedido = await _pedidoRepository.ObterConexao()
-                .QueryAsync<dynamic>(sql , new { clienteId });
+                .QueryAsync<dynamic>(sql, new { clienteId });
 
             return MapearPedido(pedido);
         }

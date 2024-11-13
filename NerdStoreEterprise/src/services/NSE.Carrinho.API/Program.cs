@@ -11,6 +11,8 @@ builder.Services.AddSwaggerConfiguration();
 
 builder.Services.RegisterServices();
 
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
+
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
