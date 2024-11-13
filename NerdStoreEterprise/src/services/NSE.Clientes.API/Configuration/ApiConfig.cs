@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NSE.Cliente.API.Data;
+using NSE.Clientes.API.Data;
 using NSE.WebAPI.Core.Identidade;
 
-namespace NSE.Cliente.API.Configuration
+namespace NSE.Clientes.API.Configuration
 {
     public static class ApiConfig
     {
@@ -40,10 +40,10 @@ namespace NSE.Cliente.API.Configuration
 
             app.UseAuthConfiguration();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseAuthorization();
+
+            app.MapControllers();
         }
+
     }
 }

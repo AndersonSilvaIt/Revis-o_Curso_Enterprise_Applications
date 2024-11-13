@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NSE.Cliente.API.Models;
+using NSE.Clientes.API.Models;
 using NSE.Core.DomainObjects;
 
-namespace NSE.Cliente.API.Data.Mappings
+namespace NSE.Clientes.API.Data.Mappings
 {
-    public class ClienteMapping : IEntityTypeConfiguration<Clientes>
+    public class ClienteMapping : IEntityTypeConfiguration<Cliente>
     {
-        public void Configure(EntityTypeBuilder<Clientes> builder)
+        public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             builder.HasKey(c => c.Id);
 
@@ -34,7 +34,7 @@ namespace NSE.Cliente.API.Data.Mappings
 
             // 1 : 1 => Aluno : Endereco
             builder.HasOne(c => c.Endereco)
-                .WithOne(c => c.Clientes);
+                .WithOne(c => c.Cliente);
 
             builder.ToTable("Clientes");
         }
