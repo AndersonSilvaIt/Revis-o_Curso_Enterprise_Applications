@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using MediatR;
+using NSE.Clientes.API.Application.Events;
 using NSE.Clientes.API.Models;
 using NSE.Core.Messages;
 

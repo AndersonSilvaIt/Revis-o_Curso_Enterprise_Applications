@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using NSE.Core.Validation;
 
 namespace NSE.WebApp.MVC.Models
 {
