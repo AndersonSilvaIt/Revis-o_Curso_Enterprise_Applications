@@ -4,6 +4,11 @@ using NSE.Pedidos.Domain.Vouchers;
 using NSE.Pedidos.Infra.Data.Repository;
 using NSE.Pedidos.Infra.Data;
 using NSE.WebAPI.Core.Usuario;
+using NetDevPack.Mediator;
+using MediatR;
+using NSE.Pedidos.API.Application.Commands;
+using FluentValidation.Results;
+using NSE.Pedidos.API.Application.Events;
 
 namespace NSE.Pedidos.API.Configuration
 {
@@ -16,12 +21,15 @@ namespace NSE.Pedidos.API.Configuration
             services.AddScoped<IAspNetUser, AspNetUser>();
 
             // Commands
-            
+            services.AddScoped<IRequestHandler<AdicionarPedidoCommand, ValidationResult>, PedidoCommandHandler>();
+
             // Events
-            
+            services.AddScoped<INotificationHandler<PedidoRealizadoEvent>, PedidoEventHandler>();
+
             // Application
+            services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IVoucherQueries, VoucherQueries>();
-            
+            services.AddScoped<IPedidoQueries, PedidoQueries>();
 
             // Data
             services.AddScoped<IPedidoRepository, PedidoRepository>();
