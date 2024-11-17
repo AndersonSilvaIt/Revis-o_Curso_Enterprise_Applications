@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NSE.Carrinho.API.Migrations
 {
-    public partial class Carrinho : Migration
+    public partial class Carrinhos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,13 @@ namespace NSE.Carrinho.API.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClienteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    VoucherUtilizado = table.Column<bool>(type: "bit", nullable: false),
+                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Percentual = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    VoucherCodigo = table.Column<string>(type: "Varchar(50)", nullable: false),
+                    TipoDesconto = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,7 +47,8 @@ namespace NSE.Carrinho.API.Migrations
                         name: "FK_CarrinhoItens_CarrinhoCliente_CarrinhoId",
                         column: x => x.CarrinhoId,
                         principalTable: "CarrinhoCliente",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

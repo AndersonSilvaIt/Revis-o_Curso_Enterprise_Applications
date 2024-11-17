@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 using NSE.Carrinho.API.Model;
-using System.ComponentModel.DataAnnotations;
 
 namespace NSE.Carrinho.API.Data
 {

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NSE.Catalogo.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Produtos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

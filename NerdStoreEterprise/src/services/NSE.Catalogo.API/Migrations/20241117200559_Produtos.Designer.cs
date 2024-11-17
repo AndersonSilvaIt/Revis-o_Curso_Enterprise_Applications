@@ -12,8 +12,8 @@ using NSE.Catalogo.API.Data;
 namespace NSE.Catalogo.API.Migrations
 {
     [DbContext(typeof(CatalogoContext))]
-    [Migration("20241025173148_Initial")]
-    partial class Initial
+    [Migration("20241117200559_Produtos")]
+    partial class Produtos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
