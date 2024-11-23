@@ -55,3 +55,6 @@ Na Migration de Voucher
 		* Update-Database -StartupProject NSE.Pedidos.API
 
 Na API de pedido, será usado o Especification Pattern para validações (Pacote .NetDevPack --> Criado pelo Eduardo Pires), foi instalado no NSE.Core
+
+Não foi usado nenhuma biblioteca externa para pagamento, para simular, foi criado o projeto NSE.Pagamentos.NerdsPag
+
