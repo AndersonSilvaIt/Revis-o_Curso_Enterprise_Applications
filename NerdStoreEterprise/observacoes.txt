@@ -58,3 +58,6 @@ Na API de pedido, será usado o Especification Pattern para validações (Pacote .N
 
 Não foi usado nenhuma biblioteca externa para pagamento, para simular, foi criado o projeto NSE.Pagamentos.NerdsPag
 
+Tarefa Agendada
+	* Na API de Pedidos, terá uma tarefa agendada para ficar olhando os pedidos que ainda não foram processados. 
+	PedidoOrquestradorIntegrationHandler.cs
