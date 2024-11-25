@@ -21,6 +21,7 @@ namespace NSE.WebApp.MVC.Controllers
         {
             var produtos = await _catalogoService.ObterTodos(ps, page, q);
             ViewBag.Pesquisa = 1;
+            produtos.ReferenceAction = "Index";
 
             return View(produtos);
         }
