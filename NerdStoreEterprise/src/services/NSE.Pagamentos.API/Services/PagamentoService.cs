@@ -93,6 +93,8 @@ namespace NSE.Pagamentos.API.Services
 
                 return new ResponseMessage(validationResult);
             }
+
+            return new ResponseMessage(validationResult);
         }
     }
 }

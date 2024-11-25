@@ -58,19 +58,6 @@ namespace NSE.Pagamentos.API.Services
             return response;
         }
 
-        private async Task CancelarPagamento(PedidoCanceladoIntegrationEvent message)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
-
-                var response = await pagamentoService.CancelarPagamento(message.PedidoId);
-
-                if (!response.ValidationResult.IsValid)
-                    throw new DomainException($"Falha ao cancelar pagamento do pedido {message.PedidoId} ");
-            }
-        }
-
         private async Task CapturarPagamento(PedidoBaixadoEstoqueIntegrationEvent message)
         {
             using (var scope = _serviceProvider.CreateScope())
@@ -83,6 +70,19 @@ namespace NSE.Pagamentos.API.Services
                     throw new DomainException($"Falha ao capturar pagamento do pedido {message.PedidoId} ");
 
                 await _bus.PublishAsync(new PedidoPagoIntegrationEvent(message.ClienteId, message.PedidoId));
+            }
+        }
+
+        private async Task CancelarPagamento(PedidoCanceladoIntegrationEvent message)
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
+
+                var response = await pagamentoService.CancelarPagamento(message.PedidoId);
+
+                if (!response.ValidationResult.IsValid)
+                    throw new DomainException($"Falha ao cancelar pagamento do pedido {message.PedidoId} ");
             }
         }
     }
