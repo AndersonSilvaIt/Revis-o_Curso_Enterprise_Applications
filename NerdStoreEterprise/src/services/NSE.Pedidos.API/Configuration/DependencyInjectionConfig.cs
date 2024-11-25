@@ -4,11 +4,11 @@ using NSE.Pedidos.Domain.Vouchers;
 using NSE.Pedidos.Infra.Data.Repository;
 using NSE.Pedidos.Infra.Data;
 using NSE.WebAPI.Core.Usuario;
-using NetDevPack.Mediator;
 using MediatR;
 using NSE.Pedidos.API.Application.Commands;
 using FluentValidation.Results;
 using NSE.Pedidos.API.Application.Events;
+using NSE.Core.Mediator;
 
 namespace NSE.Pedidos.API.Configuration
 {
